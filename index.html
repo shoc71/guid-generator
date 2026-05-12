@@ -27,9 +27,9 @@
         </section>
         <section style="background-color: white;">
             <div class="container">
-                <input id="request" type="number" placeholder="Max. 100">
+                <input id="request" type="number" placeholder="Max. 100" max="100">
                 <button class="btn btn-primary" onclick="generateGuids()">Generate</button>
-                <button class="btn btn-outline-success" onclick="">Download</button>
+                <button class="btn btn-outline-success" onclick="downloadToLocal()">Download</button>
             </div>
             <div id="display">
                 <!-- dropping generated list -->
