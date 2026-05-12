@@ -1,13 +1,42 @@
 const GUID = document.getElementById("GUID");
+const copyBtn = document.getElementById("copy");
+const delayInMilliSeconds = 1500;
+const generateInputs = document.getElementById("request");
+const display = document.getElementById("display");
 
-function uuidv4() {
+const copyToClipboardText = GUID.innerText;
+function guid() {
     GUID.textContent = crypto.randomUUID();
-    // return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-    // .replace(/[xy]/g, function(c) {
-    //     const r = crypto.getRandomValues(new Uint8Array(1))[0] & 15;
-    //     const v = c === 'x' ? r : (r & 0x3) | 0x8;
-    //     return v.toString(16);
-    // });
+    return GUID.textContent
 }
 
-console.log(uuidv4());
+function copy() {
+    navigator.clipboard.writeText(copyToClipboardText);
+    copyBtn.innerText = "Copied!"
+    setTimeout(function() {
+        copyBtn.innerText = "Copy"
+    }, delayInMilliSeconds)
+}
+
+function generateGuids() {
+    display.innerHTML = '';
+
+    if (generateInputs.value <= 0) {
+        display.innerHTML = '';
+        return;
+    }
+
+    const ul = document.createElement('ul');
+
+    for (let i = 1; i <= generateInputs.value; i++){
+        const li = document.createElement('li');
+        li.textContent = guid() + i
+        ul.appendChild(li);
+    }
+    // console.log(list)
+
+    display.appendChild(ul);
+}
+
+// auto-generate when page is loaded
+guid();
