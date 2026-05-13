@@ -3,20 +3,24 @@ const copyBtn = document.getElementById("copy");
 const generateInputs = document.getElementById("request");
 const display = document.getElementById("display");
 const delayInMilliSeconds = 1500;
+const replaceBox = document.getElementById("replace-box");
 
 function guid() {
-    GUID.textContent = crypto.randomUUID();
-    return GUID.textContent
+    return crypto.randomUUID();
+}
+
+function createGUID() {
+    GUID.textContent = guid();
 }
 
 function copy() {
     const copyToClipboardText = GUID.innerText;
     navigator.clipboard.writeText(copyToClipboardText)
-
+    
     // async Promise
     .then(() => {
         copyBtn.innerText = "Copied!";
-
+        
         setTimeout(function() {
             copyBtn.innerText = "Copy";
         }, delayInMilliSeconds);
@@ -27,13 +31,14 @@ function copy() {
 }
 
 function generateGuids() {
+    const insertText = document.getElementById("insert-text").value;
     display.innerHTML = '';
-
+    
     if (generateInputs.value <= 0) {
         display.innerHTML = '';
         return;
     }
-
+    
     if (generateInputs.value > 100) {
         display.innerText = "Please select below 100";
         setTimeout(() => {
@@ -47,7 +52,9 @@ function generateGuids() {
 
     for (let i = 1; i <= generateInputs.value; i++){
         const li = document.createElement('li');
-        li.textContent = guid() + i
+        const text = guid();
+        console.log("length; " + insertText.length + " string: "+ insertText.innerText)
+        li.textContent = replaceIgnoringDashes(text, 0, insertText.length, insertText)
         ul.appendChild(li);
     }
     // console.log(list)
@@ -55,6 +62,23 @@ function generateGuids() {
     display.appendChild(ul);
 
     return display;
+}
+
+function replaceIgnoringDashes(str, start, end, replacement) {
+    
+    let chars = str.split('');
+    let count = 0;
+
+    for (let i = 0; i < chars.length; i++) {
+        if (chars[i] === '-') continue;
+
+        if (count >= start && count < end) {
+            chars[i] = replacement[count - start];
+        }
+        count++;
+    }
+
+    return chars.join('');
 }
 
 // create a temp link, click download for user, and remove it immediately
@@ -65,7 +89,6 @@ function downloadToLocal() {
     link.href = URL.createObjectURL(blob);
     link.download = "output.txt";
 
-    // Trigger Download
     document.body.appendChild(link);
     link.click();
 
@@ -74,4 +97,4 @@ function downloadToLocal() {
 }
 
 // auto-generate when page is loaded
-guid();
+createGUID();
