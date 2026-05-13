@@ -1,21 +1,29 @@
 const GUID = document.getElementById("GUID");
 const copyBtn = document.getElementById("copy");
-const delayInMilliSeconds = 1500;
 const generateInputs = document.getElementById("request");
 const display = document.getElementById("display");
+const delayInMilliSeconds = 1500;
 
-const copyToClipboardText = GUID.innerText;
 function guid() {
     GUID.textContent = crypto.randomUUID();
     return GUID.textContent
 }
 
 function copy() {
-    navigator.clipboard.writeText(copyToClipboardText);
-    copyBtn.innerText = "Copied!"
-    setTimeout(function() {
-        copyBtn.innerText = "Copy"
-    }, delayInMilliSeconds)
+    const copyToClipboardText = GUID.innerText;
+    navigator.clipboard.writeText(copyToClipboardText)
+
+    // async Promise
+    .then(() => {
+        copyBtn.innerText = "Copied!";
+
+        setTimeout(function() {
+            copyBtn.innerText = "Copy";
+        }, delayInMilliSeconds);
+    })
+    .catch(err => {
+        console.error("Failed to copy: ", err);
+    })
 }
 
 function generateGuids() {
