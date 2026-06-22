@@ -62,7 +62,7 @@ function generateGuids() {
     for (let i = 1; i <= generateInputs.value; i++){
         const li = document.createElement('li');
         const text = guid();
-        console.log("length; " + insertText.length + " string: "+ insertText.value)
+        // console.log("length; " + insertText.length + " string: "+ insertText.value)
         li.textContent = replaceIgnoringDashes(text, 0, insertText.length, insertText)
         ul.appendChild(li);
     }
