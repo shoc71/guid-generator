@@ -6,7 +6,7 @@
     <title>UUID Generator</title>
     <link rel="stylesheet" href="./assets/import/bootstrap.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/images/globe.png">
-    <!-- <link rel="stylesheet" href="./assets/style.css"> -->
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body style="background-color: black;">
     <header class="bg-secondary text-white" style="background-color: #4d5356;">
@@ -46,31 +46,34 @@
         </nav>
     </header>
     <main>
-        <section class="text-center p-2" >
+        <section class="text-center p-2">
             <h1 class="text-white text-bold p-2">Online GUID Generator</h1>
             <br />
-            <section class="grid">
-                <p class="text-secondary">Your GUID:</p> 
-                <p id="GUID" class="text-white"> <!-- Insert GUID here --> </p>
-                <button id="copy" class="btn btn-outline-light" onclick="copy()">
-                    <!-- <img src="./assets/images/copy.png" alt="copy png"> -->
-                    Copy
-                </button>
+            <section class="mb-4">
+                <section class="border border-secondary rounded pt-3 w-75 mx-auto" style="max-width: 900px;">
+                    <h2 class="text-secondary">Your GUID:</h2> 
+                    <div class="d-flex justify-content-center align-items-center pb-2">
+                        <p id="GUID" class="text-white mb-0"> <!-- Insert GUID here --> </p>
+                        <button id="copy" class="btn text-white btn-outline-secondary ms-2" onclick="copy()">
+                            Copy
+                            <img src="./assets/images/copy.png" alt="copy png">
+                        </button>
+                    </div>
+                    <section class="p-2 d-flex justify-content-center">
+                        <p class="text-secondary"> <button class="btn btn-light" onclick="createGUID()">Generate new GUID</button></p>
+                    </section>
+                </section>
             </section>
-            <p class="text-secondary"> <button class="btn btn-light" onclick="createGUID()">Generate</button> page to generate another.</p>
         </section>
-        <section style="background-color: white;">
-            <div class="container">
-                <input type="text" name="" id="insert-text" placeholder="insertable text in guid">
-            </div>
-            <div class="container">
-                <input id="request" type="number" placeholder="Max. 100" max="100">
-                <button class="btn btn-primary" onclick="generateGuids()">Generate</button>
-                <button class="btn btn-outline-success" onclick="downloadToLocal()">Download</button>
-            </div>
-            <div id="display">
+        <section class="p-3 mx-auto border rounded text-center w-75" id="generate" style="background-color: #181a1b; max-width: 900px;">
+            <h2 class="text-white mb-4">Multiple (custom) GUIDs Generator</h2>
+            <input type="text" class="border border-outline-secondary rounded" name="" id="insert-text" placeholder="insertable text in guid">
+            <input id="request" class="border rounded" type="number" placeholder="Max. 100" min="0" max="100" style="width: 96px;">
+            <button class="btn btn-primary" onclick="generateGuids()">Generate</button>
+            <button class="btn btn-outline-success" onclick="downloadToLocal()">Download</button>
+            <ol id="display" class="mt-4 mb-0">
                 <!-- dropping generated list -->
-            </div>
+            </ol>
         </section>
     </main>
     <footer class="container">

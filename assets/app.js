@@ -19,10 +19,16 @@ function copy() {
     
     // async Promise
     .then(() => {
-        copyBtn.innerText = "Copied!";
+        copyBtn.innerHTML = `
+        Copied!
+        <img src="./assets/images/copy-checked.png" alt="copy png" style="width: 16px; height: 16px;">
+        `;
         
         setTimeout(function() {
-            copyBtn.innerText = "Copy";
+            copyBtn.innerHTML = `
+            Copy
+            <img src="./assets/images/copy.png" alt="copy png">
+            `;
         }, delayInMilliSeconds);
     })
     .catch(err => {
@@ -49,11 +55,14 @@ function generateGuids() {
     }
 
     const ul = document.createElement('ul');
+    ul.classList.add('list-unstyled', 'text-center');
+    ul.style.paddingLeft = "0";
+    ul.style.marginLeft = "0";
 
     for (let i = 1; i <= generateInputs.value; i++){
         const li = document.createElement('li');
         const text = guid();
-        console.log("length; " + insertText.length + " string: "+ insertText.innerText)
+        console.log("length; " + insertText.length + " string: "+ insertText.value)
         li.textContent = replaceIgnoringDashes(text, 0, insertText.length, insertText)
         ul.appendChild(li);
     }
