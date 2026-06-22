@@ -92,6 +92,12 @@ function replaceIgnoringDashes(str, start, end, replacement) {
 
 // create a temp link, click download for user, and remove it immediately
 function downloadToLocal() {
+    
+    if (generateInputs.value <= 0) {
+        console.log("Test")
+        return;
+    }
+
     const blob = new Blob([display.innerText], {type: "text/plain"});
 
     const link = document.createElement("a");
