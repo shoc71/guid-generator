@@ -94,7 +94,6 @@ function replaceIgnoringDashes(str, start, end, replacement) {
 function downloadToLocal() {
     
     if (generateInputs.value <= 0) {
-        console.log("Test")
         return;
     }
 
